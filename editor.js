@@ -1,3 +1,6 @@
+var pages = [];
+var currentPageIndex = 0;
+var printDOM = document.getElementById('print-pages');
 var toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
   ['blockquote', 'code-block'],
@@ -26,16 +29,16 @@ var quill = new Quill('#editor', {
   theme: 'snow'
 });
 
+
 var editorContainer = document.querySelector('#editor');
 var editorContainerHeight = editorContainer.getBoundingClientRect().height;
-
 
 quill.on('text-change', function (delta, oldDelta, source) {
   var editorContentHeight = editorContainer.getBoundingClientRect().height;
   if (editorContentHeight > editorContainerHeight) {
     quill.deleteText(quill.getLength() - 1, 1);
   }
-
+  updatePrintPageContent();
 });
 
 
@@ -47,4 +50,71 @@ quill.root.addEventListener('paste', (event) => {
   if (editorContentHeight > editorContainerHeight) {
     event.preventDefault();
   }
+  updatePrintPageContent();
 });
+
+
+function clearContent() {
+  quill.setContents([]);
+}
+function updateContent() {
+  quill.root.innerHTML = pages[currentPageIndex];
+}
+
+function updatePrintPageContent() {
+  pages[currentPageIndex] = quill.root.getInnerHTML()
+}
+
+function addPage() {
+  currentPageIndex = pages.length;
+  pages.push('');
+  clearContent();
+  updatePageIndexInNavBar();
+}
+
+function navNextPage() {
+  if (currentPageIndex >= (pages.length - 1)) return;
+  currentPageIndex++;
+  updateContent();
+  updatePageIndexInNavBar();
+}
+
+function navLastPage() {
+  currentPageIndex = pages.length - 1;
+  updateContent();
+  updatePageIndexInNavBar();
+}
+
+function navPrevPage() {
+  if (currentPageIndex <= 0) return;
+  currentPageIndex--;
+  updateContent();
+  updatePageIndexInNavBar();
+}
+
+function navFirstPage() {
+  currentPageIndex = 0;
+  updateContent();
+  updatePageIndexInNavBar();
+}
+
+function updatePageIndexInNavBar() {
+  document.getElementById('current-page-index').innerText = currentPageIndex + 1;
+  document.getElementById('total-page').innerText = pages.length;
+
+}
+
+function updatePrintPagesDOM() {
+  printDOM.innerHTML = "";
+  for (let i = 0; i < pages.length; i++) {
+    const content = pages[i];
+    const el = document.createElement('div');
+    el.className ="print-page"
+    el.innerHTML = content;
+    printDOM.appendChild(el);
+  }
+
+  window.print()
+}
+
+addPage();

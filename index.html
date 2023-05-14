@@ -12,8 +12,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="editor" class="editor-page">
-    </div>
+   
+    <div id="print-pages" class="print-pages"></div>
+
+    <!-- Page -->
+    <div id="editor" class="editor-page"></div>
+
+    <!-- Page Count & Add Page Button -->   
+    <ul class="editor-page_action-btn" >
+        <li><a id="editor-page-new-btn" title="Add page" onclick="addPage()" ><img src="./assets/file-plus.svg" alt="Add Page"> &nbsp; Add Page</a></li>
+        <li><a id="editor-page-print-btn" title="Print"  onclick="updatePrintPagesDOM()"><img src="./assets/printer.svg" alt="Print"> &nbsp; Print</a></li>
+        <li><a id="editor-page-firstpage-btn" title="Go to first page" onclick="navFirstPage()"  ><img src="./assets/chevrons-left.svg" alt="First Page"> &nbsp; First </a></li>
+        <li><a id="editor-page-prevpage-btn" title="Go to previous page" onclick="navPrevPage()" ><img src="./assets/chevron-left.svg" alt="Prev Page"> &nbsp; Prev</a></li>
+        <li>
+           <span class="pages-index">
+            <span id="current-page-index" ></span>/<span id="total-page" ></span>
+           </span>
+        </li>
+        <li><a id="editor-page-nextpage-btn" title="Go to next page" onclick="navNextPage()" >Next &nbsp; <img src="./assets/chevron-right.svg" alt="Next Page"></a></li>
+        <li><a id="editor-page-lastpage-btn" title="Go to last page" onclick="navLastPage()" >Last &nbsp; <img src="./assets/chevrons-right.svg" alt="Last Page"></a></li>
+    </ul>
+
+    <div id="print-pages" class="print-pages"></div>
 
 <!-- Include the Quill library -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>

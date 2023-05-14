@@ -12,31 +12,66 @@ body {
     -webkit-box-sizing: border-box;
 }
 
-.editor-page {
+.editor-page, .print-page {
     width: 210mm;
     min-height: 297mm;
     padding: 20mm;
     margin: 10mm auto;
+    margin-bottom: 10px;
     border: 1px #D3D3D3 solid;
     border-radius: 5px;
     background: white;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
+.editor-page_action-btn {
 
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+
+    width: 210mm;
+    padding: 10px;
+    background: white;
+    border: 1px #D3D3D3 dashed;
+    margin: auto;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.editor-page_action-btn li a {
+    display: flex;
+    align-items: center;
+}
+
+.editor-page_bottom-btn:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    color: #0d6efd;
+    border-color: #0d6efd;
+}
+.print-pages {
+    display: none;
+}
 
 @page {
     size: A4;
     margin: 0;
 }
 @media print {
-    .ql-toolbar {
+    .ql-toolbar, .editor-page, .editor-page_action-btn {
         display: none;
     }
     html, body {
         width: 210mm;
         height: 297mm;        
     }
-    .editor-page {
+    .print-pages {
+        display: block;
+    }
+    .print-page {
         margin: 0;
         border: initial;
         border-radius: initial;
