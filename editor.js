@@ -38,14 +38,13 @@ quill.on('text-change', function (delta, oldDelta, source) {
   if (editorContentHeight > editorContainerHeight) {
     quill.deleteText(quill.getLength() - 1, 1);
   }
+  console.log('change')
   updatePrintPageContent();
 });
 
 
 quill.root.addEventListener('paste', (event) => {
-  console.log('copy', event)
   // Get the editor's container element and its height
-  const container = quill.container;
   var editorContentHeight = editorContainer.getBoundingClientRect().height;
   if (editorContentHeight > editorContainerHeight) {
     event.preventDefault();

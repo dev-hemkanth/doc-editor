@@ -5,6 +5,7 @@ body {
     padding: 0;
     background-color: #FAFAFA;
     font: 12pt "Tahoma";
+    line-height: 1.5;
 }
 * {
     box-sizing: border-box;
@@ -22,6 +23,7 @@ body {
     border-radius: 5px;
     background: white;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    font-size: 12px;
 }
 .editor-page_action-btn {
 
@@ -61,12 +63,15 @@ body {
     margin: 0;
 }
 @media print {
+
     .ql-toolbar, .editor-page, .editor-page_action-btn {
         display: none;
     }
     html, body {
         width: 210mm;
-        height: 297mm;        
+        height: 297mm;    
+        line-height: 1.5;
+    
     }
     .print-pages {
         display: block;
@@ -80,5 +85,8 @@ body {
         box-shadow: initial;
         background: initial;
         page-break-after: always;
+    }
+    .print-page p {
+        margin: 0;
     }
 }
